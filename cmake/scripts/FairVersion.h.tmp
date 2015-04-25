@@ -1,0 +1,5 @@
+#ifndef GOANA_VERSION
+#define GOANA_VERSION @GOANA_GIT_VERSION@
+#define GOANA_GIT_DATE "@GOANA_GIT_DATE@"
+#endif
+
