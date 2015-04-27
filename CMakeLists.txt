@@ -175,9 +175,9 @@ ENDIF(HAS_CXX11_SHAREDPOINTER)
 # cause another cmake executable to run.  The same process will walk through
 # the project's entire directory structure.
 
-add_subdirectory (gobase)
-add_subdirectory (mylib)
-add_subdirectory (example/ex1)
+add_subdirectory (base)
+add_subdirectory (analysis)
+#add_subdirectory (example/ex1)
 
 WRITE_CONFIG_FILE(config.sh)
  

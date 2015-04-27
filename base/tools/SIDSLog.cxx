@@ -1,4 +1,3 @@
-
 /********************************************************************************
  *    Copyright (C) 2014 GSI Helmholtzzentrum fuer Schwerionenforschung GmbH    *
  *                                                                              *
@@ -7,46 +6,56 @@
  *                  copied verbatim in the file "LICENSE"                       *
  ********************************************************************************/
 /**
- * FairMQLogger.cxx
+ * SIDSLog.cxx
  *
  * @since 2012-12-04
- * @author D. Klein, A. Rybalchenko
+ * @author D. Klein, A. Rybalchenko, N. Winckler
  */
 
-#include <string>
-#include <stdio.h>
+#include "SIDSLog.h"
 
-#include "FairMQLogger.h"
+int SIDSLog::fMinLogLevel=SIDSLog::DEBUG;
 
-FairMQLogger::FairMQLogger()
-    : os()
+SIDSLog::SIDSLog() : os(), fLogLevel(DEBUG)
 {
 }
 
-FairMQLogger::~FairMQLogger()
+SIDSLog::~SIDSLog() 
 {
-    cout << os.str() << endl;
+    if(fLogLevel>=SIDSLog::fMinLogLevel && fLogLevel<SIDSLog::NOLOG)
+        std::cout << os.str() << std::endl;
 }
 
-ostringstream& FairMQLogger::Log(int type)
+std::ostringstream& SIDSLog::Log(int type)
 {
-    string type_str;
+    std::string type_str;
+    fLogLevel=type;
     switch (type)
     {
-        case DEBUG:
+        case DEBUG :
             type_str = "\033[01;34mDEBUG\033[0m";
             break;
-        case INFO:
+
+        case INFO :
             type_str = "\033[01;32mINFO\033[0m";
             break;
-        case ERROR:
+
+        case SUMMARY :
+            type_str = "\033[01;35mSUMMARY\033[0m";
+            break;
+
+        case WARNING :
+            type_str = "\033[01;33mWARNING\033[0m";
+            break;
+
+        case ERROR :
             type_str = "\033[01;31mERROR\033[0m";
             break;
-        case WARN:
-            type_str = "\033[01;33mWARN\033[0m";
+
+        case NOLOG :
+            type_str = "\033[01;31mNOLOG\033[0m";
             break;
-        case STATE:
-            type_str = "\033[01;35mSTATE\033[0m";
+
         default:
             break;
     }
@@ -62,9 +71,16 @@ ostringstream& FairMQLogger::Log(int type)
     os << "[\033[01;36m" << mbstr << "\033[0m]"
        << "[" << type_str << "]"
        << " ";
-
     return os;
 }
+
+
+
+
+
+
+
+
 
 timestamp_t get_timestamp()
 {
@@ -72,3 +88,5 @@ timestamp_t get_timestamp()
     gettimeofday(&now, NULL);
     return now.tv_usec + (timestamp_t)now.tv_sec * 1000000;
 }
+
+

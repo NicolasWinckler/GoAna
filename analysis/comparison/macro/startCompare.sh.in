@@ -1,0 +1,7 @@
+#!/bin/bash
+
+
+RUN_COMPARE="runcompare"
+RUN_COMPARE+=" --config @CMAKE_SOURCE_DIR@/workspace/config/OscillationAnalysis.cfg"
+RUN_COMPARE+=" --exec plot"
+@CMAKE_BINARY_DIR@/bin/$RUN_COMPARE
