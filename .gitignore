@@ -29,7 +29,9 @@ cmake_install.cmake
 install_manifest.txt
 
 # build directory & data directory
-
+*.root
+*.DS_Store
+workspace/config/*.cfg
 build/
 example/Tutorial3/macro/data/*
 !example/Tutorial3/macro/data/dummy.txt
