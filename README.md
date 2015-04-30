@@ -10,22 +10,22 @@ Statistical data analysis framework of the orbital electron capture oscillation 
 2. Make sure that the $SIMPATH environment variable is set to FairSoft install path before starting the GoAna installation
 
 ### Optionnal
-1. download Cuba and BAT framework 
+1. download [BAT](https://www.mppmu.mpg.de/bat/) and [Cuba](http://www.feynarts.de/cuba/) framework 
 2. Follow standard cuba installation instruction
-2. Follow BAT installation instruction and set the BAT installation path prefix to the FairSoft installation path ($SIMPATH)
+3. Follow BAT installation instruction and set the BAT installation path prefix to the FairSoft installation path ($SIMPATH)
 
 
-###  install GoAna
+###  Install GoAna
 1. Go to your cloned GoAna repository
 2. Do 
-    ~~~~~~~~~~~~~~~~~~~~~    
+```bash
     mdkir build
     cd build
     cmake ..
     make  
     #(or make -jn, for n cores)
     . config.sh
-    ~~~~~~~~~~~~~~~~~~~~~
+```
 
 ### Git workflow
 1. Follow the Git workflow given [here](https://github.com/AnarManafov/GitWorkflow/blob/master/GitWorkflow.markdown)
