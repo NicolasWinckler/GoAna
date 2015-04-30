@@ -40,6 +40,6 @@ Do the same for the tree and branch names in case of root files.
 
 ### Todo:
 - Fix LinkDef error messages
-- Import and refactor Bayesian part
+- Import and refactor Bayesian and simulation packages
 - Refactor File manager
 - More docs
