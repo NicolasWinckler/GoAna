@@ -5,11 +5,11 @@ Statistical data analysis of the time modulated orbital electron capture decay e
 
 ## Installation
 
-### Pre-requesite
+### Prerequisite
 1. Install FairSoft
 2. Make sure that the $SIMPATH environment variable is set to FairSoft install path before starting the GoAna installation
 
-### Optionnal
+### Optional
 1. download [BAT](https://www.mppmu.mpg.de/bat/) and [Cuba](http://www.feynarts.de/cuba/) framework 
 2. Follow standard cuba installation instruction
 3. Follow BAT installation instruction and set the BAT installation path prefix to the FairSoft installation path ($SIMPATH)
