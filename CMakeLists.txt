@@ -109,7 +109,8 @@ find_package(ROOT 5.32.00 REQUIRED)
 #find_package(GEANT4VMC)
 #find_package(CLHEP)
 #find_package(HEPMC)
-
+find_package(cuba)
+find_package(BAT COMPONENTS models mtf mvc)
 
 If(FAIRSOFT_EXTERN)
   set(BOOST_ROOT ${SIMPATH})
@@ -153,11 +154,15 @@ Generate_Version_Info()
 
 # Set some useful variables
 SetBasicVariables()
-Set(BASE_INCLUDE_DIRECTORIES 
-    ${CMAKE_SOURCE_DIR}/gobase
-    ${CMAKE_SOURCE_DIR}/gobase/tools
-)
 
+
+
+set (BASE_INCLUDE_DIRECTORIES 
+    ${CMAKE_SOURCE_DIR}/base/data
+    ${CMAKE_SOURCE_DIR}/base/data/io
+    ${CMAKE_SOURCE_DIR}/base/model
+    ${CMAKE_SOURCE_DIR}/base/tools
+)
 ############## Add subdirectory 
 #add_subdirectory(MyLibDir)
 

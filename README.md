@@ -1,7 +1,7 @@
 #GoAna
 
-##The framework
-Statistical data analysis framework of the orbital electron capture oscillation GSI experiment
+##The Project
+Statistical data analysis of the time modulated orbital electron capture decay experiments.
 
 ## Installation
 
@@ -16,8 +16,8 @@ Statistical data analysis framework of the orbital electron capture oscillation 
 
 
 ###  Install GoAna
-1. Go to your cloned GoAna repository
-2. Do 
+1. Open a terminal and go to the cloned GoAna repository
+2. Then 
 ```bash
     mdkir build
     cd build
@@ -27,19 +27,15 @@ Statistical data analysis framework of the orbital electron capture oscillation 
     . config.sh
 ```
 
-### Git workflow
-1. Follow the Git workflow given [here](https://github.com/AnarManafov/GitWorkflow/blob/master/GitWorkflow.markdown)
 
-### more docs...
-- input/output/config paths are in the workflow directory
-- root input data files should be placed in worspace/input. 
-To change the path of the input file change the value of the key "file.name" in [input.data] section. 
-Or alternatively in command line add --input.data.file.name myfilename
-Do the same for the tree and branch names in case of root files.
+#### Git workflow for participants
+1. See [here](https://github.com/AnarManafov/GitWorkflow/blob/master/GitWorkflow.markdown)
 
 
-### Todo:
+#### Todo:
 - Fix LinkDef error messages
 - Import and refactor Bayesian and simulation packages
-- Refactor File manager
+- Refactor File manager : clean, and adapt for multi data sets input and output
+- Refactor base libs CMakeLists
 - More docs
+

@@ -8,13 +8,12 @@
 # Create a library called "SIDSData" 
 
 set(INCLUDE_DIRECTORIES
-${CMAKE_SOURCE_DIR}/base/model
+${BASE_INCLUDE_DIRECTORIES}
 )
 
 If (BAT_FOUND)
     set( SYSTEM_INCLUDE_DIRECTORIES
         ${SYSTEM_INCLUDE_DIRECTORIES}
-        ${ZMQ_INCLUDE_DIR}
         ${CUBA_INCLUDE_DIR}
         ${BAT_INCLUDE_DIR}
     )
@@ -59,8 +58,8 @@ Set(SRCS
 
 If (BAT_FOUND)
     Set(NO_DICT_SRCS
-        model/OscModel.cxx
-        model/ExpModel.cxx
+        OscModel.cxx
+        ExpModel.cxx
         )
 EndIf (BAT_FOUND)
 
