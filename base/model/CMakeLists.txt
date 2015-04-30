@@ -5,10 +5,7 @@
  #         GNU Lesser General Public Licence version 3 (LGPL) version 3,        #  
  #                  copied verbatim in the file "LICENSE"                       #
  ################################################################################
-# Create a library called "libFairTestDetector" which includes the source files given in
-# the array .
-# The extension is already found.  Any number of sources could be listed here.
-
+# Create a library called "SIDSData" 
 
 set(INCLUDE_DIRECTORIES
 ${CMAKE_SOURCE_DIR}/base/model
@@ -19,8 +16,16 @@ If (BAT_FOUND)
         ${SYSTEM_INCLUDE_DIRECTORIES}
         ${ZMQ_INCLUDE_DIR}
         ${CUBA_INCLUDE_DIR}
-        ${BAT_INCLUDE_DIR
+        ${BAT_INCLUDE_DIR}
     )
+
+    If(FAIRROOT_FOUND)
+        set( SYSTEM_INCLUDE_DIRECTORIES
+        ${SYSTEM_INCLUDE_DIRECTORIES}
+        ${ZMQ_INCLUDE_DIR}
+        )
+    EndIf(FAIRROOT_FOUND)
+
 Else(BAT_FOUND)
     Set(SYSTEM_INCLUDE_DIRECTORIES
         ${SYSTEM_INCLUDE_DIRECTORIES}

@@ -5,12 +5,11 @@
  #         GNU Lesser General Public Licence version 3 (LGPL) version 3,        #  
  #                  copied verbatim in the file "LICENSE"                       #
  ################################################################################
-# Create a library called "libFairTestDetector" which includes the source files given in
-# the array .
-# The extension is already found.  Any number of sources could be listed here.
+# Create a library called "SIDSData" 
 
 
 set(INCLUDE_DIRECTORIES
+${CMAKE_SOURCE_DIR}/base
 ${CMAKE_SOURCE_DIR}/base/data
 ${CMAKE_SOURCE_DIR}/base/data/io
 ${CMAKE_SOURCE_DIR}/base/tools
@@ -48,13 +47,11 @@ Set(NO_DICT_SRCS
 Set(LINKDEF SIDSDataLinkDef.h)
 Set(LIBRARY_NAME SIDSData)
 
-If (Boost_FOUND)
   Set(DEPENDENCIES
     SIDSTools
     boost_thread boost_system boost_serialization boost_filesystem 
     Tree Hist RIO Cint Core
     Minuit RooFitCore RooFit RooStats Foam MathMore
     Gui Spectrum)
-EndIf (Boost_FOUND)
 
 GENERATE_LIBRARY()
