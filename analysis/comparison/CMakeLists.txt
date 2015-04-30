@@ -11,6 +11,7 @@
 
 set(INCLUDE_DIRECTORIES
     ${CMAKE_SOURCE_DIR}/base/data
+    ${CMAKE_SOURCE_DIR}/base/data/io
     ${CMAKE_SOURCE_DIR}/base/tools
     ${CMAKE_SOURCE_DIR}/analysis/options
     )

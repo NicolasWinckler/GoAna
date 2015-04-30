@@ -23,6 +23,7 @@ SIDSFileManager::SIDSFileManager(   const std::string& filename,
                                         fBranchName(branchname), 
                                         fDirName(dirname)
 {
+    // copy data from root tree
     EsrTree *DecayTree = new EsrTree(fFileName,fTreeName,fBranchName);
     fDataList=DecayTree->GetEsrData();
     delete DecayTree;
@@ -34,9 +35,9 @@ SIDSFileManager::SIDSFileManager(   const std::string& filename,
         analyzedFiles.push_back(temp);
     }
     
-    SetDirectory(fDirName);
-    SetInputList(analyzedFiles);
-    GetNonAnalyzedFiles();
+    SetDirectory(fDirName);// used only for traces analysis --> get input traces files dir
+    SetInputList(analyzedFiles);// 
+    GetNonAnalyzedFiles();// used only for traces analysis --> look at directory fdirname content and check if trace files are not analyzed
     
     std::map<std::string,int> duplicates=GetDuplicatesList();
     
@@ -45,24 +46,36 @@ SIDSFileManager::SIDSFileManager(   const std::string& filename,
     for(unsigned int k(0);k<fDataList.size() ;k++)
     {
         std::string temp=fDataList[k].GetFileName();
+        // if current file name at index k is in duplicates map
+        // add the index to fDuplicatesIdx map
         if(duplicates.count(temp))
         {
             fDuplicatesIdx[temp].push_back(k);
         }
         else
         {
+            // if it is not a duplicate store index directly to final index map
             fDataToPlotIdx[temp]=k;
         }
     }
     
     
-    // count number of duplicates and add to main list the wanted index (here last added duplicates)
+    // count number of duplicates and add to final index map 
+    // the missing duplicate key and the index corresponding 
+    // to the last analyzed duplicated analysis 
     int sumduplicate=0;
-    for(auto p : fDuplicatesIdx)
+    for(auto& p : fDuplicatesIdx)
     {
         sumduplicate+=p.second.size();
         fDataToPlotIdx[p.first]=p.second.back();
     }
+    
+    // fill sorted data
+    for(auto& p : fDataToPlotIdx)
+    {
+        fSortedDataList.push_back(fDataList[p.second]);
+    }
+    
     
 }
 
@@ -121,27 +134,30 @@ bool SIDSFileManager::has_suffix(const std::string& s, const std::string& suffix
 
 void SIDSFileManager::CountDuplicates(const std::vector<std::string> &fileList)
 {
-    std::vector<std::string> list=fileList;
-    sort(list.begin(), list.end());
-    std::vector<std::string> UniqueFileInList (list.size()); 
+    std::vector<std::string> inFileList=fileList;// copy and sort again in case it is called outside constructor
+    sort(inFileList.begin(), inFileList.end());
+    std::vector<std::string> outFileList (inFileList.size()); 
     std::vector<std::string>::iterator it;
-    it=std::unique_copy (list.begin(),list.end(),UniqueFileInList.begin());
-    UniqueFileInList.resize( std::distance(UniqueFileInList.begin(),it) );
+    it=std::unique_copy (inFileList.begin(),inFileList.end(),outFileList.begin());
+    outFileList.resize( std::distance(outFileList.begin(),it) );
     
     
-    for(auto p : UniqueFileInList)
+    
+    // for all unique file name
+    for(auto& p : outFileList)
     {
-        int counduplicates=0;
-        for(auto q : list)
+        int countdupl=0;
+        // for all analysis recorded
+        for(auto& q : inFileList)
         {
+            // if unique file name match all analysis file name
             if(p==q)
             {
-                
-                
-                counduplicates++;
-                fAnalyzedFiles[p]=counduplicates;
-                if(counduplicates>1)
-                    fDuplicatesList[p]=counduplicates;
+                // count and update maps
+                countdupl++;
+                fAnalyzedFiles[p]=countdupl;
+                if(countdupl>1)
+                    fDuplicatesList[p]=countdupl;
             }
             
         }

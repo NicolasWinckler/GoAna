@@ -48,6 +48,7 @@ public:
     };
     
     SIDSFileManager();
+    
     SIDSFileManager(const std::string& filename, const std::string& treename, const std::string& branchname, const std::string &dirname=""); 
     SIDSFileManager(const std::string &dirname, const std::vector<std::string> &fileList);
     virtual ~SIDSFileManager();
@@ -56,6 +57,16 @@ public:
     void PrintAnalyzed(bool detail=false);
     void PrintNotAnalyzed(bool detail=false);
     void PrintDuplicates(bool detail=false, int anaNr=1);
+    
+    
+
+    const std::vector<EsrInjData>& GetAllData(bool sorted=false)
+    {
+        if(sorted)
+            return fSortedDataList;
+        else
+            return fDataList;
+    }
     
     std::map<std::string,int> GetDuplicatesList()
     {
@@ -74,6 +85,7 @@ protected:
     std::map<std::string,int> fDuplicatesList;
     
     std::vector<EsrInjData> fDataList;
+    std::vector<EsrInjData> fSortedDataList;
     
     std::map<std::string,std::vector<int> > fDuplicatesIdx;
     std::map<std::string, int> fDataToPlotIdx;
