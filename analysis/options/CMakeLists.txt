@@ -35,6 +35,7 @@ Set(SRCS
 
   Set(NO_DICT_SRCS
     OscConfig.cxx
+    SimpleConfig.cxx
   )
 
 Set(LIBRARY_NAME go_analysis_options)

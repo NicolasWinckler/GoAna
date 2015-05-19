@@ -21,8 +21,11 @@ include_directories(SYSTEM ${SYSTEM_INCLUDE_DIRECTORIES})
 
 If (Boost_FOUND)
   configure_file( ${CMAKE_SOURCE_DIR}/analysis/comparison/macro/startCompare.sh.in ${CMAKE_BINARY_DIR}/bin/startCompare.sh )
+  configure_file( ${CMAKE_SOURCE_DIR}/analysis/comparison/macro/ConvertRootToASCII.sh.in ${CMAKE_BINARY_DIR}/bin/ConvertRootToASCII.sh )
   EXEC_PROGRAM(/bin/chmod ARGS "u+x  ${CMAKE_BINARY_DIR}/bin/startCompare.sh")
+  EXEC_PROGRAM(/bin/chmod ARGS "u+x  ${CMAKE_BINARY_DIR}/bin/ConvertRootToASCII.sh")
 EndIf (Boost_FOUND)
+
 
 
 
@@ -35,11 +38,9 @@ set(LINK_DIRECTORIES
 link_directories(${LINK_DIRECTORIES})
 
 #Set(LIBRARY_NAME Comparelib)
-Set(DEPENDENCIES 
+Set(DEPENDENCIES_LIST 
 SIDSData SIDSTools go_analysis_options
-Tree Hist RIO Cint Core
-    Minuit RooFitCore RooFit RooStats Foam MathMore
-    Gui Spectrum Gpad
+Tree Hist RIO Cint Core Gpad
 )
 #GENERATE_LIBRARY()
 
@@ -47,10 +48,12 @@ Tree Hist RIO Cint Core
 If (Boost_FOUND)
     Set(Exe_Names
     runcompare 
+    runRootToASCII
     )
 
 set(Exe_Source
     run/runcompare.cxx
+    run/runRootToASCII.cxx
     )
 
   List(LENGTH Exe_Names _length)
@@ -61,7 +64,7 @@ set(Exe_Source
     List(GET Exe_Source ${_file} _src)
     Set(EXE_NAME ${_name})
     Set(SRCS ${_src})
-    Set(DEPENDENCIES ${DEPENDENCIES})
+    Set(DEPENDENCIES ${DEPENDENCIES_LIST})
     GENERATE_EXECUTABLE()
   EndForEach(_file RANGE 0 ${_length})
 EndIf (Boost_FOUND)

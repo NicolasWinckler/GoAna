@@ -54,33 +54,25 @@ BCMTFSystematic.h          BCMVCMeasurement.h
 BCMVCombination.h          BCModelOutput.h            BCSummaryPriorModel.h    
 )
 
+# bat lib names
 set(LIBBAT libBAT)
-
 set(LIBBAT_MODEL models)
 set(LIBBAT_MTF mtf)
 set(LIBBAT_MVC mvc)
 set(LIBBAT_COMPONENT_LIST ${LIBBAT_MODEL} ${LIBBAT_MTF} ${LIBBAT_MVC})
 
+# search paths
 set(SEARCH_DIRS /usr/local/lib /usr/local/include/BAT)
-set(SPECIAL_DIRS 
-    ${SIMPATH}/include/BAT
-    ${SIMPATH}/lib
-)
-
-
-
-
+set(SPECIAL_DIRS ${SIMPATH}/include/BAT ${SIMPATH}/lib)
 set(SEARCH_DIRS ${SEARCH_DIRS} ${SPECIAL_DIRS})
 
-
+# search bat-config path
 Set(BAT_CONFIG_SEARCHPATH
   ${SIMPATH}/bin
-  ${SIMPATH}/tools/root/bin
   $ENV{BATPREFIX}/bin
 )
 
-
-
+#reset var
 Set(BAT_FOUND FALSE)
 Set(BAT_DEFINITIONS "")
 
@@ -115,6 +107,8 @@ if(BAT_CONFIG_EXECUTABLE)
     MESSAGE(STATUS "Looking for BAT ... - Found prefix ${BAT_PREFIX_DIR}")
   endif(BAT_CMAKE_DEBUG)
 endif()
+
+
 ##########################################################
 # Form library file names 
 if (APPLE)

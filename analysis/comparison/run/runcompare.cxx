@@ -32,7 +32,9 @@ int main(int argc, char** argv)
     SET_LOG_LEVEL(DEBUG);
     
     OscConfig* config = nullptr; 
-    SIDSFileManager* man = nullptr;
+    SIDSFileManager* man_visual = nullptr;
+    SIDSFileManager* man_auto = nullptr;
+    
     std::vector<EsrInjData> DataContainer;
     
     try
@@ -46,9 +48,11 @@ int main(int argc, char** argv)
         std::string treename=config->GetPar<std::string>("input.data.file.tree.name");
         std::string branchname=config->GetPar<std::string>("input.data.file.branch.name");
 
-        man = new SIDSFileManager(filename,treename,branchname);
+        man_visual = new SIDSFileManager(filename,treename,branchname);
+        //man_auto =  new SIDSFileManager(filename,treename,branchname);
         
-        DataContainer=man->GetAllData(true);
+        
+        DataContainer=man_visual->GetAllData(true);
         // true = pre-sorted 
         // false = direct from tree
         
@@ -100,8 +104,8 @@ int main(int argc, char** argv)
     if(config)
         delete config;
     
-    if(man)
-        delete man;
+    if(man_visual)
+        delete man_visual;
     
     return 0;
 }

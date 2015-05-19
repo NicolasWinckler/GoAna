@@ -19,7 +19,7 @@ file.branch.name        =   EsrInjData.
 directory               =   @CMAKE_SOURCE_DIR@/workspace/output/log/      
 
 [output.data]
-file.name               =   @CMAKE_SOURCE_DIR@/workspace/output/output.dat
+file.name               =   @CMAKE_SOURCE_DIR@/workspace/output/summary.dat
 file.format             =   txt
 file.tree.name          =   OscTree2010
 file.branch.name        =   EC_RSA
