@@ -6,7 +6,7 @@
 name                    =   ECData_visual2014
 detector                =   245MHzResonator
 preprocess              =   visual
-file.name               =   @CMAKE_SOURCE_DIR@/workspace/input/SidsVisualDecayResultsOfflineOct2014.root
+file.name               =   @CMAKE_SOURCE_DIR@/workspace/input/RV2014_Pm_H_EC.root
 file.format             =   root
 file.tree.name          =   SIDSdecayData
 file.branch.name        =   EsrInjData.
