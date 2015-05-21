@@ -1,0 +1,12 @@
+#!/bin/bash
+
+
+PLOT="runPlot"
+if [ "$#" -gt 0 ]; then
+  PLOT+=" $*"
+fi
+
+
+PLOT+=" --config @CMAKE_SOURCE_DIR@/workspace/config/OscillationAnalysis.cfg"
+PLOT+=" --exec plot"
+@CMAKE_BINARY_DIR@/bin/$PLOT

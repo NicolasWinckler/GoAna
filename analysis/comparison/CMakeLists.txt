@@ -5,9 +5,6 @@
  #         GNU Lesser General Public Licence version 3 (LGPL) version 3,        #  
  #                  copied verbatim in the file "LICENSE"                       #
  ################################################################################
-# Create a library called "libFairTestDetector" which includes the source files given in
-# the array .
-# The extension is already found.  Any number of sources could be listed here.
 
 set(INCLUDE_DIRECTORIES
     ${CMAKE_SOURCE_DIR}/base/data
@@ -22,8 +19,10 @@ include_directories(SYSTEM ${SYSTEM_INCLUDE_DIRECTORIES})
 If (Boost_FOUND)
   configure_file( ${CMAKE_SOURCE_DIR}/analysis/comparison/macro/startCompare.sh.in ${CMAKE_BINARY_DIR}/bin/startCompare.sh )
   configure_file( ${CMAKE_SOURCE_DIR}/analysis/comparison/macro/ConvertRootToASCII.sh.in ${CMAKE_BINARY_DIR}/bin/ConvertRootToASCII.sh )
+  configure_file( ${CMAKE_SOURCE_DIR}/analysis/comparison/macro/PlotData.sh.in ${CMAKE_BINARY_DIR}/bin/PlotData.sh )
   EXEC_PROGRAM(/bin/chmod ARGS "u+x  ${CMAKE_BINARY_DIR}/bin/startCompare.sh")
   EXEC_PROGRAM(/bin/chmod ARGS "u+x  ${CMAKE_BINARY_DIR}/bin/ConvertRootToASCII.sh")
+  EXEC_PROGRAM(/bin/chmod ARGS "u+x  ${CMAKE_BINARY_DIR}/bin/PlotData.sh")
 EndIf (Boost_FOUND)
 
 
@@ -49,11 +48,13 @@ If (Boost_FOUND)
     Set(Exe_Names
     runcompare 
     runRootToASCII
+    runPlot
     )
 
 set(Exe_Source
     run/runcompare.cxx
     run/runRootToASCII.cxx
+    run/runPlot.cxx
     )
 
   List(LENGTH Exe_Names _length)

@@ -8,7 +8,7 @@
 #include "SimpleConfig.h"
 
 
-SimpleConfig::SimpleConfig() : SIDSProgOptions()
+SimpleConfig::SimpleConfig() : SIDSProgOptions(), fconfigfile_flag(false)
 {
     InitOptionDescription();
     
@@ -31,9 +31,13 @@ int SimpleConfig::ParseAll(const int argc, char** argv, bool AllowUnregistered)
     if(ParseCmdLine(argc,argv,fCmdline_options,fvarmap,AllowUnregistered))
         return 1;
     
-    //if(ParseCfgFile(fConfigFile,fConfig_file_options,fvarmap,AllowUnregistered))
-    //    return 1;
-    
+    if(fconfigfile_flag)
+    {
+        fConfig_file_options.add(fConfigDesc);
+        fVisible_options.add(fConfig_file_options);
+        if(ParseCfgFile(fConfigFile,fConfig_file_options,fvarmap,AllowUnregistered))
+            return 1;
+    }
     PrintOptions();
     
     return 0;
